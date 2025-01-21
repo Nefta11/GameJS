@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego Basico</title>
+    <link rel="icon" href="/images/icon.png" type="image/png">
     <style type="text/css">
         canvas {
-            background-color: rgb(145, 200, 133);
+            background-color: rgb(238, 130, 238);
         }
 
         body {
@@ -31,28 +32,89 @@
          ctx.stroke();
          */
 
-         let player = new Image();
-            player.src = '/images/dog.png';
+        let player = new Image();
+        player.src = '/images/dog.png';
 
-            let x = 0;
-            let y = 0;
+        let x = 0;
+        let y = 0;
+        let key, keyState = 0;
 
-            player.onload = function() {
-                ctx.drawImage(player, x, y , 150, 150);
+        player.onload = function () {
+            ctx.drawImage(player, x, y, 150, 150);
+        }
+
+        document.onkeydown = function (e) {
+            keyState = "keydown";
+            key = e.key;
+        }
+
+        document.onkeyup = function (e) {
+            keyState = "keyup";
+        }
+
+        let obstaculo = [
+            {
+
+                x: 300,
+                y: 0,
+                width: 50,
+                height: 200
+            }
+            ,
+            {
+                x: 600,
+                y: 0,
+                width: 50,
+                height: 200
+            }
+            ,
+            {
+                x: 900,
+                y: 0,
+                width: 50,
+                height: 400
+            }
+            ,
+            {
+                x: 300,
+                y: 22,
+                width: 50,
+                height: 200
+            }
+        ]
+
+        setInterval(function () {
+            if (keyState === "keyup") {
+                return;
             }
 
-            document.onkeydown = function (e) {
-                key = e.key;
+            if (key === "w") {
+                y -= 1;
             }
 
-            setInterval(function() {
-                if (key === "w"){
-                    y -= 10;
-                }
+            if (key === "a") {
+                x -= 1;
+            }
 
-                ctx.clearRect(0, 0, 2000, 2000);
-                ctx.drawImage(player, x, y, 150, 150);
-            }, 5);
+            if (key === "s") {
+                y += 1;
+            }
+
+            if (key === "d") {
+                x += 1;
+            }
+
+            ctx.clearRect(0, 0, 2000, 2000);
+            ctx.drawImage(player, x, y, 150, 150);
+
+            ctx.fillStyle = "black";
+
+            for (let i = 0; i < obstaculo.length; i++) {
+                const obs = obstaculo[i];
+                obs.x -= 1;
+                ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+            }
+        }, 5);
 
     </script>
 
