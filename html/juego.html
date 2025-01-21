@@ -31,28 +31,28 @@
          ctx.stroke();
          */
 
-         let player = new Image();
-            player.src = '/images/dog.png';
+        let player = new Image();
+        player.src = '/images/dog.png';
 
-            let x = 0;
-            let y = 0;
+        let x = 0;
+        let y = 0;
 
-            player.onload = function() {
-                ctx.drawImage(player, x, y , 150, 150);
+        player.onload = function () {
+            ctx.drawImage(player, x, y, 150, 150);
+        }
+
+        document.onkeydown = function (e) {
+            key = e.key;
+        }
+
+        setInterval(function () {
+            if (key === "w") {
+                y -= 10;
             }
 
-            document.onkeydown = function (e) {
-                key = e.key;
-            }
-
-            setInterval(function() {
-                if (key === "w"){
-                    y -= 10;
-                }
-
-                ctx.clearRect(0, 0, 2000, 2000);
-                ctx.drawImage(player, x, y, 150, 150);
-            }, 5);
+            ctx.clearRect(0, 0, 2000, 2000);
+            ctx.drawImage(player, x, y, 150, 150);
+        }, 5);
 
     </script>
 
