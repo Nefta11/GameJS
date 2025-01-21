@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego Basico</title>
+    <style type="text/css">
+        canvas {
+            background-color: rgb(145, 200, 133);
+        }
+        body {
+            margin: 0 auto;
+            
+        }	
+
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="200" height="100">
+
+    </canvas>
+    <script type="text/javascript">
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        ctx.moveTo(0, 0);
+        ctx.lineTo(200, 100);
+
+        ctx.stroke();
+    </script>
+
+</body>
+
+</html>
