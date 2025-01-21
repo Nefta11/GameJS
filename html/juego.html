@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Juego Basico</title>
+    <link rel="icon" href="/images/icon.png" type="image/png">
     <style type="text/css">
         canvas {
-            background-color: rgb(145, 200, 133);
+            background-color: rgb(238, 130, 238);
         }
 
         body {
@@ -47,7 +48,19 @@
 
         setInterval(function () {
             if (key === "w") {
-                y -= 10;
+                y -= 1;
+            }
+
+            if (key === "a") {
+                x -= 1;
+            }
+
+            if (key === "s") {
+                y += 1;
+            }
+
+            if (key === "d") {
+                x += 1;
             }
 
             ctx.clearRect(0, 0, 2000, 2000);
