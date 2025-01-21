@@ -52,12 +52,36 @@
             keyState = "keyup";
         }
 
-        let obstaculo = {
-            x: 300,
-            y: 0,
-            width: 50,
-            height: 200
-        }
+        let obstaculo = [
+            {
+
+                x: 300,
+                y: 0,
+                width: 50,
+                height: 200
+            }
+            ,
+            {
+                x: 400,
+                y: 0,
+                width: 50,
+                height: 200
+            }
+            ,
+            {
+                x: 500,
+                y: 0,
+                width: 50,
+                height: 200
+            }
+            ,
+            {
+                x: 300,
+                y: 0,
+                width: 50,
+                height: 200
+            }
+        ]
 
         setInterval(function () {
             if (keyState === "keyup") {
@@ -84,8 +108,12 @@
             ctx.drawImage(player, x, y, 150, 150);
 
             ctx.fillStyle = "black";
-            obstaculo.x -= 1;
-            ctx.fillRect(obstaculo.x, obstaculo.y, obstaculo.width, obstaculo.height);
+
+            for (let i = 0; i < obstaculo.length; i++) {
+                const obs = obstaculo[i];
+                obs.x -= 1;
+                ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+            }
         }, 5);
 
     </script>
