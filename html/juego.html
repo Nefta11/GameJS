@@ -52,6 +52,13 @@
             keyState = "keyup";
         }
 
+        let obstaculo =  {
+            x: 300,
+            y: 0,
+            width: 50,
+            height: 200
+        }
+
         setInterval(function () {
             if (keyState === "keyup") {
                 return;
@@ -75,6 +82,10 @@
 
             ctx.clearRect(0, 0, 2000, 2000);
             ctx.drawImage(player, x, y, 150, 150);
+
+            ctx.fillStyle = "black";
+            obstaculo.x -= 1;
+            ctx.fillRect(obstaculo.x, obstaculo.y, obstaculo.width,ds obstaculo.height);
         }, 5);
 
     </script>
