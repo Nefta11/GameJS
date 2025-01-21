@@ -9,12 +9,12 @@
         canvas {
             background-color: rgb(145, 200, 133);
         }
+
         body {
             margin: 0 auto;
             overflow: hidden;
 
-        }	
-
+        }
     </style>
 </head>
 
@@ -26,10 +26,14 @@
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
 
-        ctx.moveTo(0, 0);
-        ctx.lineTo(200, 100);
+        /* ctx.moveTo(0, 0);
+         ctx.lineTo(200, 100);
+         ctx.stroke();
+         */
 
-        ctx.stroke();
+         let player = new Image();
+            player.src = '/images/dog.png';
+
     </script>
 
 </body>
