@@ -38,8 +38,21 @@
             let y = 0;
 
             player.onload = function() {
-                ctx.drawImage(player, x, y, 100, 100);
+                ctx.drawImage(player, x, y , 150, 150);
             }
+
+            document.onkeydown = function (e) {
+                key = e.key;
+            }
+
+            setInterval(function() {
+                if (key === "w"){
+                    y -= 10;
+                }
+
+                ctx.clearRect(0, 0, 2000, 2000);
+                ctx.drawImage(player, x, y, 150, 150);
+            }, 5);
 
     </script>
 
