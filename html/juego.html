@@ -76,7 +76,7 @@
                 x: chooseRandom(500, 1500),
                 y: chooseRandom(0, 500),
                 width: 50,
-                height: 400
+                height: 200
             }
             ,
             {
@@ -100,6 +100,25 @@
                 height: 200
             }
         ]
+
+        function handleCollision(obstaculo) {
+            const playerLeft = x + 150;
+            const playerRight = x + 150;
+            const playerTop = y + 150;
+            const playerBottom = y + 150;
+
+            const obstaculoLeft = obstaculo.x;
+            const obstaculoRight = obstaculo.x + obstaculo.width;
+            const obstaculoTop = obstaculo.y;
+            const obstaculoBottom = obstaculo.y + obstaculo.height;
+
+            if (playerButtom < obstaculoTop || playerTop > obstaculoBottom || playerRight < obstaculoLeft || playerLeft > obstaculoRight) {
+                return true; {
+                    return false;
+                }
+            }
+
+        }
 
         setInterval(function () {
             if (keyState === "keyup") {
@@ -131,6 +150,11 @@
                 const obs = obstaculo[i];
                 obs.x -= 1;
                 ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+
+                if (handleCollision(obs)) {
+                    alert("Perdiste");
+                    location.reload();
+                }
             }
         }, 5);
 
