@@ -37,16 +37,26 @@
 
         let x = 0;
         let y = 0;
+        let key, keyState = 0;
 
         player.onload = function () {
             ctx.drawImage(player, x, y, 150, 150);
         }
 
         document.onkeydown = function (e) {
+            keyState = "keydown";
             key = e.key;
         }
 
+        document.onkeyup = function(e){
+            keyState = "keyup";
+        }
+
         setInterval(function () {
+            if (keyState === "keyup") {
+                return;
+            }
+
             if (key === "w") {
                 y -= 1;
             }
