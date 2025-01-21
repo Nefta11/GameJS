@@ -52,32 +52,50 @@
             keyState = "keyup";
         }
 
+        function chooseRandom(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
         let obstaculo = [
             {
 
-                x: 300,
-                y: 0,
+                x: chooseRandom(500, 1500),
+                y: chooseRandom(0, 500),
                 width: 50,
                 height: 200
             }
             ,
             {
-                x: 600,
-                y: 0,
+                x: chooseRandom(500, 1500),
+                y: chooseRandom(0, 500),
                 width: 50,
                 height: 200
             }
             ,
             {
-                x: 900,
-                y: 0,
+                x: chooseRandom(500, 1500),
+                y: chooseRandom(0, 500),
                 width: 50,
                 height: 400
             }
             ,
             {
-                x: 300,
-                y: 22,
+                x: chooseRandom(500, 1500),
+                y: chooseRandom(0, 500),
+                width: 50,
+                height: 200
+            }
+            ,
+            {
+                x: chooseRandom(500, 1500),
+                y: chooseRandom(0, 500),
+                width: 50,
+                height: 200
+            }
+            ,
+            {
+                x: chooseRandom(500, 1500),
+                y: chooseRandom(0, 500),
                 width: 50,
                 height: 200
             }
