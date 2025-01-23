@@ -20,17 +20,12 @@
 </head>
 
 <body>
-    <canvas id="canvas" width="2000" height="1000">
-
-    </canvas>
+    <canvas id="canvas" width="2000" height="1000"></canvas>
+    <div id="score" style="font-size: 24px; position: absolute; top: 10px; left: 10px; color: white;">Score: 0</div>
     <script type="text/javascript">
         const canvas = document.getElementById('canvas');
         const ctx = canvas.getContext('2d');
-
-        /* ctx.moveTo(0, 0);
-         ctx.lineTo(200, 100);
-         ctx.stroke();
-         */
+        const scoreElement = document.getElementById('score');
 
         let player = new Image();
         player.src = '/images/dog.png';
@@ -38,6 +33,7 @@
         let x = 0;
         let y = 0;
         let key, keyState = 0;
+        let score = 0;
 
         player.onload = function () {
             ctx.drawImage(player, x, y, 150, 150);
@@ -53,69 +49,72 @@
         }
 
         let obstaculo = [
-            {
+            { x: 300, y: Math.random() * 800, width: 50, height: Math.random() * 100 + 50 },
+            { x: 600, y: Math.random() * 800, width: 50, height: Math.random() * 100 + 50 },
+            { x: 900, y: Math.random() * 800, width: 50, height: Math.random() * 100 + 50 },
+            { x: 1200, y: Math.random() * 800, width: 50, height: Math.random() * 100 + 50 }
+        ];
 
-                x: 300,
-                y: 0,
-                width: 50,
-                height: 200
+        function generateObstacle() {
+            const height = Math.random() * 100 + 50;
+            const yPos = Math.random() * 800;
+            obstaculo.push({ x: 2000, y: yPos, width: 50, height: height });
+        }
+
+        function resetGame() {
+            x = 0;
+            y = 0;
+            score = 0;
+            scoreElement.innerText = "Score: " + score;
+            obstaculo = [
+                { x: 300, y: Math.random() * 800, width: 50, height: Math.random() * 100 + 50 },
+                { x: 600, y: Math.random() * 800, width: 50, height: Math.random() * 100 + 50 },
+                { x: 900, y: Math.random() * 800, width: 50, height: Math.random() * 100 + 50 },
+                { x: 1200, y: Math.random() * 800, width: 50, height: Math.random() * 100 + 50 }
+            ];
+        }
+
+        function checkCollision() {
+            for (let i = 0; i < obstaculo.length; i++) {
+                const obs = obstaculo[i];
+                if (x < obs.x + obs.width && x + 150 > obs.x && y < obs.y + obs.height && y + 150 > obs.y) {
+                    alert("Game Over");
+                    resetGame();
+                    return true;
+                }
             }
-            ,
-            {
-                x: 600,
-                y: 0,
-                width: 50,
-                height: 200
-            }
-            ,
-            {
-                x: 900,
-                y: 0,
-                width: 50,
-                height: 400
-            }
-            ,
-            {
-                x: 300,
-                y: 22,
-                width: 50,
-                height: 200
-            }
-        ]
+            return false;
+        }
 
         setInterval(function () {
-            if (keyState === "keyup") {
-                return;
+            if (keyState === "keydown") {
+                if (key === "w") y -= 1;
+                if (key === "a") x -= 1;
+                if (key === "s") y += 1;
+                if (key === "d") x += 1;
             }
 
-            if (key === "w") {
-                y -= 1;
-            }
-
-            if (key === "a") {
-                x -= 1;
-            }
-
-            if (key === "s") {
-                y += 1;
-            }
-
-            if (key === "d") {
-                x += 1;
-            }
-
-            ctx.clearRect(0, 0, 2000, 2000);
+            ctx.clearRect(0, 0, 2000, 1000);
             ctx.drawImage(player, x, y, 150, 150);
 
             ctx.fillStyle = "black";
-
             for (let i = 0; i < obstaculo.length; i++) {
                 const obs = obstaculo[i];
                 obs.x -= 1;
-                ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+                if (obs.x + obs.width < 0) {
+                    obstaculo.splice(i, 1);
+                    score++;
+                    scoreElement.innerText = "Score: " + score;
+                    i--;
+                } else {
+                    ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
+                }
+            }
+
+            if (!checkCollision()) {
+                if (Math.random() < 0.01) generateObstacle();
             }
         }, 5);
-
     </script>
 
 </body>
